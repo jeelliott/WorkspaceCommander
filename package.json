@@ -1,0 +1,118 @@
+{
+    "name": "workspacecommander",
+    "displayName": "Workspace Commander",
+    "description": "Extension for managing multiple projects running status within a workspace",
+    "version": "1.0.2",
+    "publisher": "jelliott",
+    "engines": {
+        "vscode": "^1.28.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/workspace",
+    "activationEvents": [
+        "onView:groupsTree",
+        "onView:uxProjectsTree",
+        "onView:apiProjectsTree",
+        "onView:entProjectsTree",
+        "onView:libProjectsTree",
+        "onCommand:projects.start",
+        "onCommand:projects.restart",
+        "onCommand:projects.stop",
+        "onCommand:groups.start"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "projects.action",
+                "title": "action"
+            },
+            {
+                "command": "projects.start",
+                "title": "action"
+            },
+            {
+                "command": "projects.stop",
+                "title": "stop"
+            },
+            {
+                "command": "projects.restart",
+                "title": "restart"
+            },
+            {
+                "command": "groups.start",
+                "title": "start"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "workspace-commander",
+                    "title": "Workspace Commander",
+                    "icon": "img/wrk-cmd.svg"
+                }
+            ]
+        },
+        "views": {
+            "workspace-commander": [
+                {
+                    "id": "groupsTree",
+                    "name": "Start Groups"
+                },
+                {
+                    "id": "uxProjectsTree",
+                    "name": "UX Projects"
+                },
+                {
+                    "id": "apiProjectsTree",
+                    "name": "API Projects"
+                },
+                {
+                    "id": "entProjectsTree",
+                    "name": "Enterprise Projects"
+                },
+                {
+                    "id": "libProjectsTree",
+                    "name": "Library Projects"
+                }
+            ]
+        },
+        "menus": {
+            "view/item/context": [
+                {
+                    "command": "projects.stop",
+                    "when": "view == uxProjectsTree && viewItem == running"
+                },
+                {
+                    "command": "projects.stop",
+                    "when": "view == apiProjectsTree && viewItem == running"
+                },
+                {
+                    "command": "projects.restart",
+                    "when": "view == apiProjectsTree && viewItem == running"
+                },
+                {
+                    "command": "projects.stop",
+                    "when": "view == entProjectsTree && viewItem == running"
+                },
+                {
+                    "command": "projects.restart",
+                    "when": "view == entProjectsTree && viewItem == running"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^3.1.6",
+        "vscode": "^1.1.21",
+        "tslint": "^5.11.0",
+        "@types/node": "^10.12.5"
+    }
+}
