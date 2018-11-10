@@ -48,7 +48,7 @@ An example configuration is below:
 
 ```json
 "settings": {
-	"commander": {
+	"workspace-commander": {
 		"pathPrefix": "~/appdev/",
 		"groups": [
 			{
